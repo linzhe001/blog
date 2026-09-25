@@ -1,0 +1,5 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const target = getRelativeLocaleUrl('en', 'posts/missing-coordinate-in-surgery');
+---
+<!doctype html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex" /><meta http-equiv="refresh" content={`0;url=${target}`} /><link rel="canonical" href={new URL(target, Astro.site).href} /><title>Article moved | Linzhe Jiang</title></head><body><p>The article is available at <a href={target}>The Missing Coordinate in Surgery</a>.</p></body></html>
