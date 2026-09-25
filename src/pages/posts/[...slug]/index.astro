@@ -199,7 +199,9 @@ const ogImage = ogImageUrl
 
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("#article h2, #article h3, #article h4, #article h5, #article h6")
+      document.querySelectorAll(
+        "#article h2, #article h3, #article h4, #article h5, #article h6"
+      )
     );
     for (const heading of headings) {
       // Raw HTML headings (including the bilingual post) have no anchor ID.
@@ -219,6 +221,91 @@ const ogImage = ogImageUrl
     }
   }
   addHeadingLinks();
+
+  function initCitationPreviews() {
+    const links = document.querySelectorAll("#article .citation-link");
+    if (!links.length) return;
+
+    document.getElementById("citation-preview")?.remove();
+    const preview = document.createElement("div");
+    preview.id = "citation-preview";
+    preview.className = "citation-preview";
+    preview.setAttribute("role", "tooltip");
+    preview.hidden = true;
+    document.body.appendChild(preview);
+    let activeLink = null;
+
+    function hide(link) {
+      preview.hidden = true;
+      link?.removeAttribute("aria-describedby");
+      if (activeLink === link) activeLink = null;
+    }
+
+    function position(link) {
+      const box = link.getBoundingClientRect();
+      const left = Math.max(
+        12,
+        Math.min(box.left, window.innerWidth - preview.offsetWidth - 12)
+      );
+      const below = box.bottom + 8;
+      const top =
+        below + preview.offsetHeight <= window.innerHeight - 8
+          ? below
+          : Math.max(8, box.top - preview.offsetHeight - 8);
+      preview.style.left = `${left}px`;
+      preview.style.top = `${top}px`;
+    }
+
+    for (const link of links) {
+      const target = document.getElementById(link.hash.slice(1));
+      if (!target) continue;
+
+      function show() {
+        preview.textContent = `[${link.textContent}] ${target.textContent.trim()}`;
+        preview.hidden = false;
+        activeLink = link;
+        link.setAttribute("aria-describedby", preview.id);
+        position(link);
+      }
+
+      link.addEventListener("pointerenter", show);
+      link.addEventListener("pointerleave", () => hide(link));
+      link.addEventListener("focus", show);
+      link.addEventListener("blur", () => hide(link));
+      link.addEventListener("click", event => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+        event.preventDefault();
+        hide(link);
+        if (location.hash !== link.hash) history.pushState(null, "", link.hash);
+        target.scrollIntoView();
+        target.focus({ preventScroll: true });
+      });
+    }
+
+    // Smooth scrolling can still be finishing when a link is hovered.
+    // Keep the floating preview aligned instead of dismissing it mid-hover.
+    function onScroll() {
+      if (activeLink && !preview.hidden) position(activeLink);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        window.removeEventListener("scroll", onScroll);
+        preview.remove();
+      },
+      { once: true }
+    );
+  }
+  initCitationPreviews();
 
   function attachCopyButtons() {
     const copyButtonLabel = "Copy";

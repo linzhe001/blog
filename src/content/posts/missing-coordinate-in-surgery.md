@@ -25,42 +25,42 @@ featured: true
 <h2>3. Keeping the Map Valid</h2>
 <p>Preoperative imaging provides a rich prior; intraoperative sensing provides current evidence. CT, MRI, and three-dimensional models describe deep anatomy and global spatial relationships. Fluorescence, intraoperative ultrasound, and video provide something different: observations of the anatomy as it exists now. The preoperative model tells the system what it expects to find; intraoperative observations tell it whether those expectations still match reality.</p>
 <p>A fluorescent boundary, an ultrasound landmark, or a recognizable surface structure can help confirm a registration. A growing mismatch can indicate that the spatial state is drifting. At that point, the right system behavior may be to lower confidence, request a new observation, re-register, or stop presenting guidance. In that sense, intraoperative sensing does more than inform the surgeon; it can also become an input to the spatial-state estimator.</p>
-<p>This is why reliable soft-tissue navigation is fundamentally a state-management problem. The state includes position, deformation, anatomical relationships, uncertainty, and the conditions under which the current estimate should no longer be used. Clinical evidence reflects the difficulty of maintaining such a state: a 2021 systematic review of image-guided laparoscopic liver surgery reported navigation accuracy commonly in the range of 8–15 millimeters, while a 2026 clinical feasibility study using electromagnetic tracking reported a mean target registration error of 6.3 ± 3.8 millimeters and an average registration time of 11 ± 7 minutes.[6,7] The harder problem is not simply how to align a map, but how to know whether that alignment remains valid.</p>
+<p>This is why reliable soft-tissue navigation is fundamentally a state-management problem. The state includes position, deformation, anatomical relationships, uncertainty, and the conditions under which the current estimate should no longer be used. Clinical evidence reflects the difficulty of maintaining such a state: a 2021 systematic review of image-guided laparoscopic liver surgery reported navigation accuracy commonly in the range of 8–15 millimeters, while a 2026 clinical feasibility study using electromagnetic tracking reported a mean target registration error of 6.3 ± 3.8 millimeters and an average registration time of 11 ± 7 minutes.<span class="citation-group">[<a class="citation-link" href="#ref-en-6" aria-label="Reference 6">6</a>,<a class="citation-link" href="#ref-en-7" aria-label="Reference 7">7</a>]</span> The harder problem is not simply how to align a map, but how to know whether that alignment remains valid.</p>
 <h2>4. Where Today’s Navigation Stops</h2>
 <p>Navigation is already a mature clinical category, but the term covers several different capabilities. Rigid-anatomy systems in neurosurgery, spine surgery, and orthopedics maintain coordinates using relatively stable structures and fixed references. Instrument-tracking systems localize tools. Intraoperative imaging and fluorescence refresh information at discrete moments. All are useful forms of spatial support.</p>
 <p>The harder problem begins when the anatomy itself becomes the moving reference. Instrument motion does not tell us whether the organ model is still correct, and a new image does not automatically maintain alignment with the preoperative model. Soft tissue introduces deformation, respiratory motion, traction, collapse, and eventually structural change. The gap is therefore not the absence of navigation, but the absence of a lightweight way to maintain trusted spatial information as soft-tissue anatomy changes.</p>
 <h2>5. Beyond Case Volume</h2>
 <p>The size of the opportunity depends on two different numbers: how many procedures could use spatial guidance, and how densely those procedures are distributed across hospitals. Using a deliberately narrow model focused on two non-overlapping tasks—localization of occult thoracic lesions and localization of deep abdominal lesions—we estimate a global opportunity boundary of approximately 532,000 procedures per year. This number describes the potential task pool, not a revenue forecast.</p>
-<p>The second number—case density—may matter more for adoption. Surgical technologies with high fixed costs work best when enough procedures are concentrated within an institution to justify capital, training, maintenance, and workflow change. A 2026 systematic review of robotic-surgery economics found minimum annual caseload thresholds ranging from roughly 40 to 300 procedures, depending on the platform and procedure.[1] The exact thresholds do not define spatial-navigation economics, but they illustrate the underlying mechanism: fixed cost creates a volume requirement.</p>
+<p>The second number—case density—may matter more for adoption. Surgical technologies with high fixed costs work best when enough procedures are concentrated within an institution to justify capital, training, maintenance, and workflow change. A 2026 systematic review of robotic-surgery economics found minimum annual caseload thresholds ranging from roughly 40 to 300 procedures, depending on the platform and procedure.<span class="citation-group">[<a class="citation-link" href="#ref-en-1" aria-label="Reference 1">1</a>]</span> The exact thresholds do not define spatial-navigation economics, but they illustrate the underlying mechanism: fixed cost creates a volume requirement.</p>
 <p>A system used 30 times a year is a very different purchasing proposition from one used every day. This changes what “low cost” should mean. The relevant cost structure includes capital requirements, per-case costs, registration time, specialized staff, dedicated sensors, and limits on reuse across procedures. Lowering those burdens can reduce the case density required to justify deployment. That is how lower cost can expand adoption.</p>
 <h2>6. Making Spatial Guidance Lighter</h2>
-<p>Much of the conversation around AI in surgery focuses on autonomy, while clinical adoption remains more incremental. A systematic review of 49 FDA-cleared surgical robotic systems between 2015 and 2023 found that 86% were Level 1 robot-assistance systems, while 6% reached Level 3 conditional autonomy.[2] For spatial guidance, the more immediate opportunity may be to reduce the work and hardware required to establish a trustworthy state.</p>
-<p>Learning-based methods are beginning to replace selected elements of the navigation workflow: manual landmarks, explicit surface digitization, some registration steps, and, in selected settings, parts of the external sensing stack.[3–5] A 2026 study of navigated arthroscopy, for example, showed that SLAM could remove the need for a surface-digitizing probe, while an anatomical reference marker was still required to meet the navigation objective.[5] This points to a more practical design question than whether navigation can become fully sensorless: what is the minimum sufficient sensor set for the task?</p>
+<p>Much of the conversation around AI in surgery focuses on autonomy, while clinical adoption remains more incremental. A systematic review of 49 FDA-cleared surgical robotic systems between 2015 and 2023 found that 86% were Level 1 robot-assistance systems, while 6% reached Level 3 conditional autonomy.<span class="citation-group">[<a class="citation-link" href="#ref-en-2" aria-label="Reference 2">2</a>]</span> For spatial guidance, the more immediate opportunity may be to reduce the work and hardware required to establish a trustworthy state.</p>
+<p>Learning-based methods are beginning to replace selected elements of the navigation workflow: manual landmarks, explicit surface digitization, some registration steps, and, in selected settings, parts of the external sensing stack.<span class="citation-group">[<a class="citation-link" href="#ref-en-3" aria-label="Reference 3">3</a>,<a class="citation-link" href="#ref-en-4" aria-label="Reference 4">4</a>,<a class="citation-link" href="#ref-en-5" aria-label="Reference 5">5</a>]</span> A 2026 study of navigated arthroscopy, for example, showed that SLAM could remove the need for a surface-digitizing probe, while an anatomical reference marker was still required to meet the navigation objective.<span class="citation-group">[<a class="citation-link" href="#ref-en-5" aria-label="Reference 5">5</a>]</span> This points to a more practical design question than whether navigation can become fully sensorless: what is the minimum sufficient sensor set for the task?</p>
 <p>The temporal requirement matters as well. If temporal coverage is limited to a critical decision window, the minimum sufficient sensor set may also be smaller than the one required for continuous non-rigid tracking. Together, these define two dimensions of system simplification: minimum sufficient sensing and minimum sufficient temporal coverage. The near-term opportunity for AI is therefore to reduce the cost and workflow burden of obtaining a trustworthy spatial state.</p>
 <h2>Conclusion</h2>
 <p>High-end navigation has already shown that hospitals value trusted spatial information. The next step may be to make trustworthy spatial states easier and cheaper to establish at the moments that matter, rather than solve continuous soft-tissue navigation in one leap.</p>
 <p>Surgical spatial intelligence can begin with one valid moment, expand to several, and eventually become continuous. The first generation does not need a map that is always right. It needs a map that knows when it is still right. Surgical spatial intelligence can begin here.</p>
 <h2>References</h2>
 <ol>
-<li>
+<li id="ref-en-1" tabindex="-1">
 <p>Garavini AB, et al. Minimum caseload for cost-effective robotic-assisted surgery: a systematic review. J Robot Surg. 2026;20(1):216. PMID: 41634236.</p>
 </li>
-<li>
+<li id="ref-en-2" tabindex="-1">
 <p>Lee A, Baker TS, Bederson JB, Rapoport BI. Levels of autonomy in FDA-cleared surgical robots: a systematic review. NPJ Digit Med. 2024;7(1):103. PMID: 38671232.</p>
 </li>
-<li>
+<li id="ref-en-3" tabindex="-1">
 <p>Zhou J, Gao B, Wang K, Pei J, Heng PA, Qin J. Landmark-free preoperative-to-intraoperative registration in laparoscopic liver resection. IEEE Trans Med Imaging. 2025;44(11):4350–4362. PMID: 40424105.</p>
 </li>
-<li>
+<li id="ref-en-4" tabindex="-1">
 <p>Yang Y, et al. Markerless augmented reality registration for surgical guidance: a multi-anatomy clinical accuracy study. Int J Comput Assist Radiol Surg. 2026;21(7):1525–1532. PMID: 42250192.</p>
 </li>
-<li>
+<li id="ref-en-5" tabindex="-1">
 <p>Baptista T, Raposo C, Marques M, Vaz D, Antunes M, Barreto JP. Adapting monocular SLAM for surface-trace free 3D registration in navigated arthroscopy. Int J Comput Assist Radiol Surg. 2026;21(5):1099–1107. PMID: 42062640.</p>
 </li>
-<li>
+<li id="ref-en-6" tabindex="-1">
 <p>Schneider C, et al. Performance of image guided navigation in laparoscopic liver surgery — a systematic review. Surg Oncol. 2021;38:101637. PMID: 34358880.</p>
 </li>
-<li>
+<li id="ref-en-7" tabindex="-1">
 <p>Olthof KA, et al. Toward augmented reality in laparoscopic liver surgery using electromagnetic tracking: a clinical feasibility study. Surg Endosc. 2026;40(4):3538–3547. PMID: 42377473.</p>
 </li>
 </ol>
@@ -103,42 +103,42 @@ featured: true
 <h2>3. 一张地图如何保持可信</h2>
 <p>术前影像提供先验，术中传感提供当前证据。CT、MRI 和三维模型擅长描述深部解剖和全局空间关系；荧光、术中超声和视频提供的是另一类信息：眼前这一刻，解剖实际上是什么样子。术前模型告诉系统预期在哪里找到结构，术中观测则告诉系统这个预期是否仍然符合当前患者。</p>
 <p>一条荧光边界、一个超声标志点或者一个可识别的表面结构，都可以帮助验证当前配准。如果观测和模型之间的偏差不断增大，系统就可以判断空间状态正在漂移。这时，更合理的系统行为是降低置信度、请求新的观测、重新配准或者暂停提供导航信息。荧光、超声和视频因此不仅是展示给术者看的信息，也可以成为空间状态估计的一部分。</p>
-<p>这也是为什么可靠的软组织导航本质上是一个状态管理问题。系统需要维护的不只是位置，还包括形变、解剖关系、不确定性以及当前结果何时应该停止使用。临床研究也反映了维持这类状态的难度：2021 年一项腹腔镜肝脏影像导航系统综述中，临床研究常见导航精度约为 8–15 mm；到 2026 年，一项采用电磁追踪的临床可行性研究报告平均目标配准误差为 6.3 ± 3.8 mm，平均配准时间为 11 ± 7 分钟。[6,7] 真正的问题不只是把地图对齐，而是知道这个对齐什么时候仍然成立。</p>
+<p>这也是为什么可靠的软组织导航本质上是一个状态管理问题。系统需要维护的不只是位置，还包括形变、解剖关系、不确定性以及当前结果何时应该停止使用。临床研究也反映了维持这类状态的难度：2021 年一项腹腔镜肝脏影像导航系统综述中，临床研究常见导航精度约为 8–15 mm；到 2026 年，一项采用电磁追踪的临床可行性研究报告平均目标配准误差为 6.3 ± 3.8 mm，平均配准时间为 11 ± 7 分钟。<span class="citation-group">[<a class="citation-link" href="#ref-zh-6" aria-label="参考文献 6">6</a>,<a class="citation-link" href="#ref-zh-7" aria-label="参考文献 7">7</a>]</span> 真正的问题不只是把地图对齐，而是知道这个对齐什么时候仍然成立。</p>
 <h2>4. 今天的导航，停在哪里</h2>
 <p>导航已经是成熟的临床产品类别，但“导航”这个词覆盖了几种不同的能力。颅脑、脊柱和骨科导航依赖相对稳定的解剖结构和固定参考建立坐标；器械追踪解决工具的位置；术中影像和荧光则可以在若干时刻刷新对当前解剖的观察。这些都是有价值的空间支持。</p>
 <p>真正困难的部分出现在解剖本身开始变化以后。器械的位置并不能说明器官模型仍然准确；重新获得一张术中影像，也不意味着术前模型和当前解剖之间的关系能够持续保持。软组织带来了形变、呼吸、牵拉、萎陷以及最终的结构改变。因此，市场缺的不是“导航”，而是一种能够在软组织变化中以更低部署负担维持可信空间信息的方式。</p>
 <h2>5. 病例数量之外，还有病例密度</h2>
 <p>这个机会需要看两个不同的数字：有多少病例可能需要空间导航，以及这些病例在医院里的分布有多集中。如果只计算两类相互独立的核心任务——胸腔隐匿病灶定位和腹腔深部病灶定位——按照目前的模型，我们得到的全球机会边界约为 53.2 万例/年。这个数字描述的是潜在任务规模，而不是收入预测。</p>
-<p>第二个数字——病例密度——可能对渗透率更重要。高固定成本的手术设备需要足够多的病例来摊薄资本投入、培训、维护和流程改造。2026 年一项机器人手术成本效益系统综述中，不同平台和术式报告的最低年病例量大致分布在 40–300 例之间。[1] 这些具体阈值并不直接定义空间导航的经济学，但它们揭示了同一个基本机制：固定成本会转化成病例量要求。</p>
+<p>第二个数字——病例密度——可能对渗透率更重要。高固定成本的手术设备需要足够多的病例来摊薄资本投入、培训、维护和流程改造。2026 年一项机器人手术成本效益系统综述中，不同平台和术式报告的最低年病例量大致分布在 40–300 例之间。<span class="citation-group">[<a class="citation-link" href="#ref-zh-1" aria-label="参考文献 1">1</a>]</span> 这些具体阈值并不直接定义空间导航的经济学，但它们揭示了同一个基本机制：固定成本会转化成病例量要求。</p>
 <p>一家医院每年只使用 30 次的设备，与每天都能进入手术流程的设备，是完全不同的采购决策。因此，“低成本”不应该只理解为采购价格下降。更重要的是降低整个部署负担：固定资本、单病例成本、配准时间、专用人员、专用传感器以及有限术式覆盖带来的设备闲置。如果这些负担下降，一家医院需要达到的最低病例密度也可能随之下降。这才是成本如何改变渗透率。</p>
 <h2>6. 如何把空间能力做轻</h2>
-<p>手术 AI 的讨论经常从自主化开始，但临床产品的发展路径目前更加渐进。一项针对 2015–2023 年 49 个 FDA-cleared 手术机器人系统的系统综述显示，其中 86% 仍处于 Level 1 robot assistance，达到 Level 3 conditional autonomy 的系统约占 6%。[2] 对空间导航而言，更近期的机会可能是减少建立一个可信空间状态所需要的人工步骤和专用硬件。</p>
-<p>学习方法正在逐步替代导航流程中的部分人工操作、人工标志点、表面数字化步骤以及某些场景中的专用传感器。[3–5] 例如，2026 年一项导航关节镜研究显示，SLAM 可以取消原本用于表面描记的数字化探针，但为了达到导航目标，解剖参考标记仍然需要保留。[5] 这类结果提出了一个比“能不能做到零传感器”更实际的问题：完成这个临床任务，最低需要什么样的传感器组合？</p>
+<p>手术 AI 的讨论经常从自主化开始，但临床产品的发展路径目前更加渐进。一项针对 2015–2023 年 49 个 FDA-cleared 手术机器人系统的系统综述显示，其中 86% 仍处于 Level 1 robot assistance，达到 Level 3 conditional autonomy 的系统约占 6%。<span class="citation-group">[<a class="citation-link" href="#ref-zh-2" aria-label="参考文献 2">2</a>]</span> 对空间导航而言，更近期的机会可能是减少建立一个可信空间状态所需要的人工步骤和专用硬件。</p>
+<p>学习方法正在逐步替代导航流程中的部分人工操作、人工标志点、表面数字化步骤以及某些场景中的专用传感器。<span class="citation-group">[<a class="citation-link" href="#ref-zh-3" aria-label="参考文献 3">3</a>,<a class="citation-link" href="#ref-zh-4" aria-label="参考文献 4">4</a>,<a class="citation-link" href="#ref-zh-5" aria-label="参考文献 5">5</a>]</span> 例如，2026 年一项导航关节镜研究显示，SLAM 可以取消原本用于表面描记的数字化探针，但为了达到导航目标，解剖参考标记仍然需要保留。<span class="citation-group">[<a class="citation-link" href="#ref-zh-5" aria-label="参考文献 5">5</a>]</span> 这类结果提出了一个比“能不能做到零传感器”更实际的问题：完成这个临床任务，最低需要什么样的传感器组合？</p>
 <p>时间要求同样重要。因为第一代产品只需要覆盖一个关键决策窗口，所需的最低传感器组合也可能小于全程连续非刚性跟踪所需要的配置。这给出了系统轻量化的两个维度：最低充分传感器组合，以及最低充分时间覆盖。因此，AI 近期更现实的价值是降低获得一个可信空间状态所需要的硬件和工作流成本。</p>
 <h2>结语</h2>
 <p>高端导航已经证明，医院愿意为可信的空间信息付费。下一步未必需要一步解决全程连续软组织导航，而是可以先降低在关键时刻建立可信空间状态的成本和复杂度。</p>
 <p>手术空间智能可以从一个可信时刻开始，再扩展到几个关键阶段，最终走向连续状态。第一代产品不需要一张永远正确的地图；它首先需要知道这张地图什么时候仍然正确。手术空间智能可以先从这里开始。</p>
 <h2>参考文献</h2>
 <ol>
-<li>
+<li id="ref-zh-1" tabindex="-1">
 <p>Garavini AB, et al. Minimum caseload for cost-effective robotic-assisted surgery: a systematic review. J Robot Surg. 2026;20(1):216. PMID: 41634236.</p>
 </li>
-<li>
+<li id="ref-zh-2" tabindex="-1">
 <p>Lee A, Baker TS, Bederson JB, Rapoport BI. Levels of autonomy in FDA-cleared surgical robots: a systematic review. NPJ Digit Med. 2024;7(1):103. PMID: 38671232.</p>
 </li>
-<li>
+<li id="ref-zh-3" tabindex="-1">
 <p>Zhou J, Gao B, Wang K, Pei J, Heng PA, Qin J. Landmark-free preoperative-to-intraoperative registration in laparoscopic liver resection. IEEE Trans Med Imaging. 2025;44(11):4350–4362. PMID: 40424105.</p>
 </li>
-<li>
+<li id="ref-zh-4" tabindex="-1">
 <p>Yang Y, et al. Markerless augmented reality registration for surgical guidance: a multi-anatomy clinical accuracy study. Int J Comput Assist Radiol Surg. 2026;21(7):1525–1532. PMID: 42250192.</p>
 </li>
-<li>
+<li id="ref-zh-5" tabindex="-1">
 <p>Baptista T, Raposo C, Marques M, Vaz D, Antunes M, Barreto JP. Adapting monocular SLAM for surface-trace free 3D registration in navigated arthroscopy. Int J Comput Assist Radiol Surg. 2026;21(5):1099–1107. PMID: 42062640.</p>
 </li>
-<li>
+<li id="ref-zh-6" tabindex="-1">
 <p>Schneider C, et al. Performance of image guided navigation in laparoscopic liver surgery — a systematic review. Surg Oncol. 2021;38:101637. PMID: 34358880.</p>
 </li>
-<li>
+<li id="ref-zh-7" tabindex="-1">
 <p>Olthof KA, et al. Toward augmented reality in laparoscopic liver surgery using electromagnetic tracking: a clinical feasibility study. Surg Endosc. 2026;40(4):3538–3547. PMID: 42377473.</p>
 </li>
 </ol>
