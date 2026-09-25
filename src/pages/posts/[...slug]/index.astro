@@ -199,9 +199,12 @@ const ogImage = ogImageUrl
 
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6")
+      document.querySelectorAll("#article h2, #article h3, #article h4, #article h5, #article h6")
     );
     for (const heading of headings) {
+      // Raw HTML headings (including the bilingual post) have no anchor ID.
+      // A link to just "#" jumps to the top and can reset the language switch.
+      if (!heading.id || heading.querySelector(".heading-link")) continue;
       heading.classList.add("group");
       const link = document.createElement("a");
       link.className =
