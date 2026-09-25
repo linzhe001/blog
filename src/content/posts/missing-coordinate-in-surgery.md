@@ -9,8 +9,7 @@ featured: true
 
 <div class="language-switch" role="group" aria-label="Article language"><button type="button" class="lang-option" data-language="en" aria-pressed="true">English</button><button type="button" class="lang-option" data-language="zh" aria-pressed="false">中文</button></div>
 
-<div class="lang-en">
-<h1 class="lang-title">The Missing Coordinate in Surgery</h1>
+<div class="lang-en" lang="en">
 <p class="lang-meta">Surgical Spatial Intelligence Series #1 · Version 1.0 · Published 2026-09-13</p>
 <blockquote>
 <p><strong>Why surgical spatial intelligence may begin with a map that knows when it is still valid</strong></p>
@@ -87,8 +86,8 @@ featured: true
 </blockquote>
 </div>
 
-<div class="lang-zh">
-<h1 class="lang-title">手术缺失的坐标</h1>
+<div class="lang-zh" lang="zh-CN" hidden>
+<h2 class="lang-title">手术缺失的坐标</h2>
 <p class="lang-meta">《手术空间智能》系列 01 · 版本 1.0 · 发布于 2026-09-13</p>
 <blockquote>
 <p><strong>手术空间智能，可能从一张“知道自己什么时候仍然有效”的地图开始</strong></p>
